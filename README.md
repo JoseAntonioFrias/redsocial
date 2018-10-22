@@ -24,3 +24,9 @@ blackbutterfly676/barney
 lazyelephant670/ticklish
 redlion601/smitty
 ```
+
+## Ejecución de los tests de pruebas unitarias:
+
+```
+$ npm test
+````

@@ -4,6 +4,7 @@ export const USER_ID = 'users/USER_ID'
 export const INSERT_MSN = 'users/INSERT_MSN'
 export const SOLICITAR_AMISTAD = 'users/SOLICITAR_AMISTAD'
 export const ACEPTAR_AMISTAD = 'users/ACEPTAR_AMISTAD'
+export const LOGOUT = 'LOGOUT'
 const initialState = {
   userId: null,
   users: 0,
@@ -52,11 +53,25 @@ export default (state = initialState, action) => {
         ...state,
         amigos
       }
+    case LOGOUT:
+      return {
+        ...state,
+        amigos: []
+      };
 
     default:
       return state
   }
 }
+
+export const logout = () => {
+  return async dispatch => {
+    dispatch({
+      type: LOGOUT
+    })
+  }
+};
+
 export const insertMessage = (data) => {
   return async dispatch => {
     dispatch({
@@ -66,7 +81,6 @@ export const insertMessage = (data) => {
   }
 }
 export const getUsers = () => {
-
   return async dispatch => {
     let data = false;
     var url = 'https://randomuser.me/api/?results=5&seed=foobar';

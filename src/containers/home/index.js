@@ -3,7 +3,7 @@ import { push } from 'connected-react-router'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import styled from "styled-components";
-import { getUsers, setUserId } from '../../modules/users'
+import { getUsers, setUserId, logout } from '../../modules/users'
 import { Link } from 'react-router-dom'
 const Wrapper = styled.div`
   display:flex;
@@ -97,11 +97,11 @@ class Home extends Component {
   };
 
   render() {
-    const data = this.props.users.users
+    const data = this.props.users.users;
     return (
       <div>
 
-        {this.state.logged && <Logout onClick={() => this.setState({ logged: false })}>logout</Logout>}
+        {this.state.logged && <Logout onClick={() => { this.props.logout(); this.setState({ logged: false })}}>logout</Logout>}
         {this.state.logged ?
 
           data.length > 0 && data.map((user, index) =>
@@ -126,10 +126,6 @@ class Home extends Component {
             <button onClick={() => this.loguearse(this.state.textValue, this.state.passValue)}>login</button>
           </Login>
         }
-
-
-
-
       </div>
     );
   };
@@ -147,6 +143,7 @@ const mapDispatchToProps = dispatch =>
     {
       getUsers,
       setUserId,
+      logout,
       changePage: () => push('/about-us')
     },
     dispatch
